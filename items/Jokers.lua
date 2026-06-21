@@ -102,14 +102,14 @@ SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, f
     local text = (amount * 100) .. "%"
 
     G.E_MANAGER:add_event(Event({
-      trigger = 'immediate',
+      trigger = "immediate",
       func = (function()
         ease_colour(G.C.UI_CHIPS, mix_colours({ 0.8, 0.45, 0.85, 1 }, G.C.UI_CHIPS, amount))
         ease_colour(G.C.UI_MULT, mix_colours({ 0.8, 0.45, 0.85, 1 }, G.C.UI_MULT, amount))
         if not ananho_balance_mixed then
           ananho_balance_mixed = true
           G.E_MANAGER:add_event(Event({
-            trigger = 'after',
+            trigger = "after",
             blockable = false,
             blocking = false,
             delay = 6.3,
@@ -129,12 +129,12 @@ SMODS.calculate_individual_effect = function(effect, scored_card, key, amount, f
 
     if not effect.remove_default_message then
       if from_edition then
-        card_eval_status_text(scored_card, 'jokers', nil, percent, nil,
-          { message = text, colour = { 0.8, 0.45, 0.85, 1 }, sound = 'gong', edition = true })
+        card_eval_status_text(scored_card, "jokers", nil, percent, nil,
+          { message = text, colour = { 0.8, 0.45, 0.85, 1 }, sound = "gong", edition = true })
       else
         card_eval_status_text(
-          effect.message_card or effect.juice_card or scored_card or effect.card or effect.focus, 'extra', nil,
-          percent, nil, { message = text, colour = { 0.8, 0.45, 0.85, 1 }, sound = 'gong', edition = true })
+          effect.message_card or effect.juice_card or scored_card or effect.card or effect.focus, "extra", nil,
+          percent, nil, { message = text, colour = { 0.8, 0.45, 0.85, 1 }, sound = "gong", edition = true })
       end
     end
 
@@ -175,5 +175,50 @@ SMODS.Joker {
   end,
   in_pool = function()
     return anchors_and_hourglasses_has_suit("ananho_Hourglass", true)
+  end
+}
+
+SMODS.Joker {
+  key = "fisherman",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 2,
+  cost = 6,
+  pos = { x = 4, y = 0 },
+  calculate = function(self, card, context)
+    if context.individual and context.cardarea == G.play and (context.other_card:is_suit("Spades") or context.other_card:is_suit("Clubs")) then
+      local _card = context.other_card
+      
+      G.E_MANAGER:add_event(Event({
+        trigger = "before",
+        delay = 0.4,
+        func = function()
+          play_sound("tarot1")
+          card:juice_up()
+          _card:flip()
+          play_sound("card1", 1)
+          _card:juice_up(0.3, 0.3)
+          return true
+        end
+      }))
+      G.E_MANAGER:add_event(Event({
+        trigger = "before",
+        delay = 0.2,
+        func = function()
+          _card:change_suit("ananho_Anchors")
+          return true
+        end
+      }))
+      G.E_MANAGER:add_event(Event({
+        delay = 0.1,
+        func = function()
+          _card:flip()
+          play_sound("tarot2", 1)
+          _card:juice_up(0.3, 0.3)
+          return true
+        end
+      }))
+      return { message = localize("ananho_Anchors", "suits_plural"), colour = G.C.SUITS["ananho_Anchors"] }
+    end
   end
 }

@@ -33,7 +33,14 @@ return {
                     "to balance {C:chips}Chips{} and {C:mult}Mult{}",
                     "by {C:attention}#3#%{} when scored",
                 }
-            }
+            },
+            j_ananho_fisherman = {
+                name = "Fisherman",
+                text = {
+                    "Played {C:spades}Spades{} and {C:clubs}Clubs{}",
+                    "become {C:ananho_anchors}Anchors{} when scored",
+                }
+            },
         },
         Planet = {
             c_ananho_quaoar = {
