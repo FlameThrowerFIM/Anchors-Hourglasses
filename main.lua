@@ -5,9 +5,16 @@
   py = 34
 }]]--
 
+G.C.ANCHORSHOURGLASSES = {
+  ANCHORS_LC = HEX("58DAB0"),
+  ANCHORS_HC = HEX("29D653"),
+  HOURGLASSES_LC = HEX("AC684D"),
+  HOURGLASSES_HC = HEX("E97625")
+}
+
 local allFolders = { "none", "items" }
 
-local allFiles = { ["none"] = {}, ["items"] = { "Jokers" } }
+local allFiles = { ["none"] = {}, ["items"] = { "Suits", "Jokers" } }
 
 for i = 1, #allFolders do
   if allFolders[i] == "none" then
