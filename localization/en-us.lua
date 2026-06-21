@@ -16,6 +16,61 @@ return {
                     "{C:ananho_hourglasses}#2#{} suit give",
                     "{C:mult}+#1#{} Mult when scored",
                 }
+            },
+            j_ananho_clampearl = {
+                name = "Clam Pearl",
+                text = {
+                    "Played cards with",
+                    "{C:ananho_anchors}#2#{} suit give",
+                    "{C:white,X:chips}X#1#{} Chips",
+                }
+            },
+            j_ananho_limestone = {
+                name = "Limestone",
+                text = {
+                    "Played cards with {C:ananho_hourglasses}#4#{}",
+                    "suit have a {C:green}#1# in #2#{} chance",
+                    "to balance {C:chips}Chips{} and {C:mult}Mult{}",
+                    "by {C:attention}#3#%{} when scored",
+                }
+            }
+        },
+        Planet = {
+            c_ananho_quaoar = {
+                name = "Quaoar",
+                text = {
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#{}",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips",
+                }
+            },
+            c_ananho_haumea = {
+                name = "Haumea",
+                text = {
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#{}",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips",
+                }
+            },
+            c_ananho_sedna = {
+                name = "Sedna",
+                text = {
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#{}",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips",
+                }
+            },
+            c_ananho_makemake = {
+                name = "Makemake",
+                text = {
+                    "{S:0.8}({S:0.8,V:1}lvl.#1#{S:0.8}){} Level up",
+                    "{C:attention}#2#{}",
+                    "{C:mult}+#3#{} Mult and",
+                    "{C:chips}+#4#{} chips",
+                }
             }
         },
     },

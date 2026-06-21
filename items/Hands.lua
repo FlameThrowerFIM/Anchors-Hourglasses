@@ -1,3 +1,5 @@
+-- This code was taken from Paperback. Thanks! ^u^
+
 function ananho_get_unique_suits(scoring_hand, bypass_debuff, flush_calc)
     local suits = {}
 
