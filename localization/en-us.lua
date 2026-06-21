@@ -20,16 +20,40 @@ return {
         },
     },
     misc = {
-        suits_plural={
+        suits_plural = {
             ananho_Anchors = "Anchors",
             ananho_Hourglasses = "Hourglasses",
         },
-        suits_singular={
+        suits_singular = {
             ananho_Anchors = "Anchor",
             ananho_Hourglasses = "Hourglass",
         },
+        poker_hands = {
+            ["ananho_Spectrum"] = "Spectrum",
+            ["ananho_Straight Spectrum"] = "Straight Spectrum",
+            ["ananho_Straight Spectrum (Royal)"] = "Royal Spectrum",
+            ["ananho_Spectrum House"] = "Spectrum House",
+            ["ananho_Spectrum Five"] = "Spectrum Five",
+        },
+        poker_hand_descriptions = {
+            ["ananho_Spectrum"] = {
+                "5 cards with different suits"
+            },
+            ["ananho_Straight Spectrum"] = {
+                "5 cards in a row (consecutive ranks),",
+                "each with a different suit"
+            },
+            ["ananho_Spectrum House"] = {
+                "A Three of a Kind and a Pair with",
+                "each card having a different suit"
+            },
+            ["ananho_Spectrum Five"] = {
+                "5 cards with the same rank,",
+                "each with a different suit"
+            },
+        },
         dictionary = {
-            
+
         }
     }
 }

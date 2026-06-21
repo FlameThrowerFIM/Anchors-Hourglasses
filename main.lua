@@ -14,7 +14,7 @@ G.C.ANCHORSHOURGLASSES = {
 
 local allFolders = { "none", "items" }
 
-local allFiles = { ["none"] = {}, ["items"] = { "Suits", "Jokers" } }
+local allFiles = { ["none"] = {}, ["items"] = { "Suits", "Hands", "Jokers" } }
 
 for i = 1, #allFolders do
   if allFolders[i] == "none" then
