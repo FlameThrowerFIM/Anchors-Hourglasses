@@ -19,6 +19,13 @@ SMODS.Atlas {
     py = 18
 }
 
+SMODS.Atlas {
+    key = "SuitUIHC",
+    path = "AnchorsHourglassesSuitUIHC.png",
+    px = 18,
+    py = 18
+}
+
 function anchors_and_hourglasses_has_suit(suit, ignore_wild)
     for _, v in ipairs(G.playing_cards or {}) do
         if not SMODS.has_no_suit(v) and (v.base.suit == suit or (not ignore_wild and v:is_suit(suit))) then
@@ -36,7 +43,7 @@ SMODS.Suit {
     lc_colour = G.C.ANCHORSHOURGLASSES.ANCHORS_LC,
 
     hc_atlas = "SuitsHC",
-    hc_ui_atlas = "SuitUI",
+    hc_ui_atlas = "SuitUIHC",
     hc_colour = G.C.ANCHORSHOURGLASSES.ANCHORS_HC,
     pos = { y = 0 },
     ui_pos = { x = 0, y = 0 },
@@ -68,11 +75,11 @@ SMODS.Suit {
     lc_ui_atlas = "SuitUI",
     lc_colour = G.C.ANCHORSHOURGLASSES.HOURGLASSES_LC,
 
-    hc_atlas = "Suits",
-    hc_ui_atlas = "SuitUI",
+    hc_atlas = "SuitsHC",
+    hc_ui_atlas = "SuitUIHC",
     hc_colour = G.C.ANCHORSHOURGLASSES.HOURGLASSES_HC,
     pos = { y = 1 },
-    ui_pos = { x = 0, y = 1 },
+    ui_pos = { x = 1, y = 0 },
     in_pool = function(self, args)
         if args and args.anchors_and_hourglasses and args.anchors_and_hourglasses.include_hourglasses then
             return true
