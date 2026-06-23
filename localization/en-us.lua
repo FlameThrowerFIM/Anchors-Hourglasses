@@ -41,6 +41,47 @@ return {
                     "become {C:ananho_anchors}Anchors{} when scored",
                 }
             },
+            j_ananho_navigation = {
+                name = "Celestial Navigation",
+                text = {
+                    "{C:ananho_anchors}Anchors{} scored have a",
+                    "{C:green}#1# in #2#{} chance to",
+                    "create a random {C:planet}planet{} card",
+                    "{C:green}#1# in #2#{} chance to",
+                }
+            },
+            j_ananho_tablet = {
+                name = "Tablet",
+                text = {
+                    "Create a random {C:tarot}tarot{} card",
+                    "if played hand is",
+                    "a {C:attention}Flush of Hourglasses{},",
+                }
+            },
+            j_ananho_lurid = {
+                name = "Lurid Joker",
+                text = {
+                    "{C:chips}+#1#{} Chips if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                }
+            },
+            j_ananho_zealous = {
+                name = "Zealous Joker",
+                text = {
+                    "{C:mult}+#1#{} Mult if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                }
+            },
+            j_ananho_dynasty = {
+                name = "The Dynasty",
+                text = {
+                    "{X:mult,C:white} X#1# {} Mult if played",
+                    "hand contains",
+                    "a {C:attention}#2#",
+                },
+            },
         },
         Planet = {
             c_ananho_quaoar = {

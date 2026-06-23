@@ -188,7 +188,7 @@ SMODS.Joker {
   calculate = function(self, card, context)
     if context.individual and context.cardarea == G.play and (context.other_card:is_suit("Spades") or context.other_card:is_suit("Clubs")) then
       local _card = context.other_card
-      
+
       G.E_MANAGER:add_event(Event({
         trigger = "before",
         delay = 0.4,
@@ -222,3 +222,147 @@ SMODS.Joker {
     end
   end
 }
+
+
+
+SMODS.Joker {
+  key = "navigation",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 2,
+  cost = 7,
+  pos = { x = 1, y = 1 },
+  config = { extra = { numerator = 1, denominator = 5, suit = "ananho_Anchors" } },
+  loc_vars = function(self, info_queue, card)
+    local numerator, denominator = SMODS.get_probability_vars(card, card.ability.extra.numerator,
+      card.ability.extra.denominator, 'ananho_navigation' .. G.GAME.round_resets.ante)
+    return { vars = { numerator, denominator, localize(card.ability.extra.suit, "suits_singular") } }
+  end,
+  calculate = function(self, card, context)
+    if context.individual and context.cardarea == G.play and
+    #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+      if context.other_card:is_suit(card.ability.extra.suit) and
+      SMODS.pseudorandom_probability(card, 'ananho_navigation' .. G.GAME.round_resets.ante,
+      card.ability.extra.numerator, card.ability.extra.denominator) then
+        G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+        return {
+          message = localize('k_plus_planet'),
+          colour = G.C.SECONDARY_SET.Planet,
+          trigger = "after",
+          delay = 0.1,
+          func = function()
+            if G.consumeables.config.card_limit > #G.consumeables.cards then
+              SMODS.add_card({ set = 'Planet', key_append = "ananho_navigation" })
+            end
+            G.GAME.consumeable_buffer = 0
+            return true
+          end
+        }
+      end
+    end
+  end,
+  in_pool = function()
+    return anchors_and_hourglasses_has_suit("ananho_Anchors", true)
+  end
+}
+
+SMODS.Joker {
+  key = "tablet",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 2,
+  cost = 7,
+  pos = { x = 3, y = 1 },
+  config = { extra = { type = "Flush", suit = "ananho_Hourglasses" } },
+  loc_vars = function(self, info_queue, card)
+    return { vars = { card.ability.extra.hand, localize(card.ability.extra.suit, "suits_singular") } }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main and context.scoring_hand and #context.scoring_hand > 0 then
+      if next(context.poker_hands[card.ability.extra.type]) and
+        context.scoring_hand[1].base.suit == card.ability.extra.suit then
+          G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+          return {
+            message = localize('k_plus_tarot'),
+            colour = G.C.PURPLE,
+            func = function()
+              SMODS.add_card {
+                set = 'Tarot',
+                key_append = 'ananho_tablet'
+              }
+              G.GAME.consumeable_buffer = 0
+              return true
+            end,
+            context.blueprint_card or card
+          }
+      end
+    end
+  end,
+  in_pool = function()
+    return anchors_and_hourglasses_has_suit("ananho_Hourglass", true)
+  end
+}
+
+SMODS.Joker {
+  key = "lurid",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 1,
+  cost = 4,
+  pos = { x = 1, y = 2 },
+  config = { extra = { chips = 80, type = "ananho_Spectrum" } },
+  loc_vars = function(self, info_queue, card)
+    return { vars = { card.ability.extra.chips, localize(card.ability.extra.type, 'poker_hands') } }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main and next(context.poker_hands[card.ability.extra.type]) then
+      return { chips =  card.ability.extra.chips }
+    end
+  end,
+  in_pool = function()
+    return G.GAME.hands["ananho_Spectrum"].played > 0
+  end
+}
+
+SMODS.Joker {
+  key = "zealous",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 1,
+  cost = 4,
+  pos = { x = 0, y = 2 },
+  config = { extra = { mult = 10, type = "ananho_Spectrum" } },
+  loc_vars = function(self, info_queue, card)
+    return { vars = { card.ability.extra.mult, localize(card.ability.extra.type, 'poker_hands') } }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main and next(context.poker_hands[card.ability.extra.type]) then
+      return { mult =  card.ability.extra.mult }
+    end
+  end,
+  in_pool = function()
+    return G.GAME.hands["ananho_Spectrum"].played > 0
+  end
+}
+
+SMODS.Joker {
+  key = "dynasty",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 3,
+  cost = 8,
+  pos = { x = 2, y = 2 },
+  config = { extra = { Xmult = 3, type = "ananho_Spectrum" } },
+  loc_vars = function(self, info_queue, card)
+    return { vars = { card.ability.extra.Xmult, localize(card.ability.extra.type, 'poker_hands') } }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main and next(context.poker_hands[card.ability.extra.type]) then
+      return { xmult =  card.ability.extra.Xmult }
+    end
+  end,
+  in_pool = function()
+    return G.GAME.hands["ananho_Spectrum"].played > 0
+  end
+}
+
