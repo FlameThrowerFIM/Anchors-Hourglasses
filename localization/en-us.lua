@@ -53,9 +53,10 @@ return {
             j_ananho_tablet = {
                 name = "Tablet",
                 text = {
-                    "Create a random {C:tarot}tarot{} card",
-                    "if played hand is",
-                    "a {C:attention}Flush of Hourglasses{},",
+                    "Create a random {C:tarot}Tarot{} card",
+                    "if played hand contains",
+                    "a {C:attention}Flush{} of {C:ananho_hourglasses}Hourglasses{}",
+                    "{C:inactive}(Must have room){}"
                 }
             },
             j_ananho_lurid = {
@@ -156,7 +157,7 @@ return {
             },
         },
         dictionary = {
-
+            k_ananho_translated_ex = "Translated!"
         }
     }
 }

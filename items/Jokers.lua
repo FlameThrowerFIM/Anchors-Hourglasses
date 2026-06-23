@@ -235,14 +235,14 @@ SMODS.Joker {
   config = { extra = { numerator = 1, denominator = 5, suit = "ananho_Anchors" } },
   loc_vars = function(self, info_queue, card)
     local numerator, denominator = SMODS.get_probability_vars(card, card.ability.extra.numerator,
-      card.ability.extra.denominator, 'ananho_navigation' .. G.GAME.round_resets.ante)
+      card.ability.extra.denominator, "ananho_navigation" .. G.GAME.round_resets.ante)
     return { vars = { numerator, denominator, localize(card.ability.extra.suit, "suits_singular") } }
   end,
   calculate = function(self, card, context)
     if context.individual and context.cardarea == G.play and
         #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
       if context.other_card:is_suit(card.ability.extra.suit) and
-          SMODS.pseudorandom_probability(card, 'ananho_navigation' .. G.GAME.round_resets.ante,
+          SMODS.pseudorandom_probability(card, "ananho_navigation" .. G.GAME.round_resets.ante,
             card.ability.extra.numerator, card.ability.extra.denominator) then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
         G.E_MANAGER:add_event(Event({
@@ -254,7 +254,7 @@ SMODS.Joker {
           end
         }))
         return {
-          message = localize('k_plus_planet'),
+          message = localize("k_plus_planet"),
           colour = G.C.SECONDARY_SET.Planet,
           message_card = context.other_card
         }
@@ -272,29 +272,36 @@ SMODS.Joker {
   blueprint_compat = true,
   rarity = 2,
   cost = 7,
-  pixel_size = { w = 55, h = 90 },
+  pixel_size = { w = 55, h = 95 },
   pos = { x = 3, y = 1 },
-  config = { extra = { type = "Flush", suit = "ananho_Hourglasses" } },
+  config = { extra = { hand = "Flush", suit = "ananho_Hourglasses" } },
   loc_vars = function(self, info_queue, card)
-    return { vars = { card.ability.extra.hand, localize(card.ability.extra.suit, "suits_singular") } }
+    return { vars = { localize(card.ability.extra.hand, "poker_hands"), localize(card.ability.extra.suit, "suits_singular") } }
   end,
   calculate = function(self, card, context)
-    if context.joker_main and context.scoring_hand and #context.scoring_hand > 0 then
-      if next(context.poker_hands[card.ability.extra.type]) and
-          context.scoring_hand[1].base.suit == card.ability.extra.suit then
+    if context.joker_main and next(context.poker_hands["Flush"]) then
+      local valid = true
+      for _, v in ipairs(context.scoring_hand) do
+        if not v:is_suit("ananho_Hourglasses") then
+          valid = false
+          break
+        end
+      end
+
+      if valid and #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
-        return {
-          message = localize('k_plus_tarot'),
-          colour = G.C.PURPLE,
+        G.E_MANAGER:add_event(Event({
           func = function()
-            SMODS.add_card {
-              set = 'Tarot',
-              key_append = 'ananho_tablet'
-            }
+            play_sound("timpani")
+            SMODS.add_card({ set = "Tarot", key_append = "ananho_tablet" })
             G.GAME.consumeable_buffer = 0
             return true
-          end,
-          context.blueprint_card or card
+          end
+        }))
+        return {
+          message = localize("k_ananho_translated_ex"),
+          colour = G.C.SECONDARY_SET.Tarot,
+          message_card = context.other_card
         }
       end
     end
@@ -313,7 +320,7 @@ SMODS.Joker {
   pos = { x = 1, y = 2 },
   config = { extra = { chips = 80, type = "ananho_Spectrum" } },
   loc_vars = function(self, info_queue, card)
-    return { vars = { card.ability.extra.chips, localize(card.ability.extra.type, 'poker_hands') } }
+    return { vars = { card.ability.extra.chips, localize(card.ability.extra.type, "poker_hands") } }
   end,
   calculate = function(self, card, context)
     if context.joker_main and next(context.poker_hands[card.ability.extra.type]) then
@@ -334,7 +341,7 @@ SMODS.Joker {
   pos = { x = 0, y = 2 },
   config = { extra = { mult = 10, type = "ananho_Spectrum" } },
   loc_vars = function(self, info_queue, card)
-    return { vars = { card.ability.extra.mult, localize(card.ability.extra.type, 'poker_hands') } }
+    return { vars = { card.ability.extra.mult, localize(card.ability.extra.type, "poker_hands") } }
   end,
   calculate = function(self, card, context)
     if context.joker_main and next(context.poker_hands[card.ability.extra.type]) then
@@ -355,7 +362,7 @@ SMODS.Joker {
   pos = { x = 2, y = 2 },
   config = { extra = { Xmult = 3, type = "ananho_Spectrum" } },
   loc_vars = function(self, info_queue, card)
-    return { vars = { card.ability.extra.Xmult, localize(card.ability.extra.type, 'poker_hands') } }
+    return { vars = { card.ability.extra.Xmult, localize(card.ability.extra.type, "poker_hands") } }
   end,
   calculate = function(self, card, context)
     if context.joker_main and next(context.poker_hands[card.ability.extra.type]) then
