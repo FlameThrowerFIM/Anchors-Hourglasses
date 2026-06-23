@@ -272,6 +272,7 @@ SMODS.Joker {
   blueprint_compat = true,
   rarity = 2,
   cost = 7,
+  pixel_size = { w = 55, h = 90 },
   pos = { x = 3, y = 1 },
   config = { extra = { type = "Flush", suit = "ananho_Hourglasses" } },
   loc_vars = function(self, info_queue, card)
