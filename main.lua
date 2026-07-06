@@ -5,6 +5,8 @@
   py = 34
 }]]--
 
+if not to_big then to_big = function(x) return x end end
+
 G.C.ANCHORSHOURGLASSES = {
   ANCHORS_LC = HEX("58DAB0"),
   ANCHORS_HC = HEX("29D653"),
