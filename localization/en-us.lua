@@ -84,6 +84,24 @@ return {
                 },
             },
         },
+        Tarot = {
+            c_ananho_mermaid = {
+                name = "The Mermaid",
+                text = {
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {V:1}#2#{}"
+                }
+            },
+            c_ananho_clockmaker = {
+                name = "The Clockmaker",
+                text = {
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {V:1}#2#{}"
+                }
+            }
+        },
         Planet = {
             c_ananho_quaoar = {
                 name = "Quaoar",
