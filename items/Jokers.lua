@@ -383,7 +383,7 @@ SMODS.Joker {
   pos = { x = 4, y = 1 },
   config = { extra = { money_per = 1 } },
   loc_vars = function(self, info_queue, card)
-    local suit = G.GAME.current_round.ananho_curator_suit
+    local suit = G.GAME.current_round.ananho_curator_suit or "Spades"
     return { vars = { card.ability.extra.money_per, localize(suit, "suits_plural"), colours = { G.C.SUITS[suit] } } }
   end,
   calculate = function(self, card, context)
