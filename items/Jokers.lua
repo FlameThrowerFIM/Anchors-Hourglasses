@@ -373,3 +373,28 @@ SMODS.Joker {
     return G.GAME.hands["ananho_Spectrum"].played > 0
   end
 }
+
+SMODS.Joker {
+  key = "curator",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 2,
+  cost = 6,
+  pos = { x = 4, y = 1 },
+  config = { extra = { money_per = 1 } },
+  loc_vars = function(self, info_queue, card)
+    local suit = G.GAME.current_round.ananho_curator_suit
+    return { vars = { card.ability.extra.money_per, localize(suit, "suits_plural"), colours = { G.C.SUITS[suit] } } }
+  end,
+  calculate = function(self, card, context)
+    if context.first_hand_drawn then
+      local money = 0
+      for _, v in ipairs(context.hand_drawn) do
+        if v:is_suit(G.GAME.current_round.ananho_curator_suit) then
+          money = money + 1
+        end
+      end
+      if money > 0 then return { dollars = money * card.ability.extra.money_per } end
+    end
+  end
+}

@@ -83,6 +83,15 @@ return {
                     "a {C:attention}#2#",
                 },
             },
+            j_ananho_curator = {
+                name = "Curator",
+                text = {
+                    "Earn {C:money}$#1#{} for each card with",
+                    "{V:1}#2#{} suit drawn in the",
+                    "first hand of each round,",
+                    "{s:0.8}suit changes at end of round{}",
+                },
+            },
         },
         Tarot = {
             c_ananho_mermaid = {
