@@ -174,7 +174,7 @@ SMODS.Joker {
     end
   end,
   in_pool = function()
-    return anchors_and_hourglasses_has_suit("ananho_Hourglass", true)
+    return anchors_and_hourglasses_has_suit("ananho_Hourglasses", true)
   end
 }
 
@@ -307,7 +307,7 @@ SMODS.Joker {
     end
   end,
   in_pool = function()
-    return anchors_and_hourglasses_has_suit("ananho_Hourglass", true)
+    return anchors_and_hourglasses_has_suit("ananho_Hourglasses", true)
   end
 }
 
@@ -371,6 +371,27 @@ SMODS.Joker {
   end,
   in_pool = function()
     return G.GAME.hands["ananho_Spectrum"].played > 0
+  end
+}
+
+SMODS.Joker {
+  key = "flyingdutchman",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 2,
+  cost = 7,
+  pos = { x = 0, y = 1 },
+  calculate = function(self, card, context)
+    if context.repetition and context.cardarea == G.play and (context.other_card:is_suit("ananho_Anchors") or context.other_card:is_suit("ananho_Hourglasses")) then
+      return { repetitions = 1 }
+    end
+
+    if context.modify_scoring_hand and not context.blueprint and (context.other_card:is_suit("ananho_Anchors") or context.other_card:is_suit("ananho_Hourglasses")) then
+      return { add_to_hand = true }
+    end
+  end,
+  in_pool = function()
+    return anchors_and_hourglasses_has_suit("ananho_Anchors", true) or anchors_and_hourglasses_has_suit("ananho_Hourglasses", true)
   end
 }
 

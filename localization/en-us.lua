@@ -83,6 +83,15 @@ return {
                     "a {C:attention}#2#",
                 },
             },
+            j_ananho_flyingdutchman = {
+                name = "The Flying Dutchman",
+                text = {
+                    "Played cards with {C:ananho_anchors}Anchors{}",
+                    "or {C:ananho_hourglasses}Hourglasses{} suits are",
+                    "always used in scoring",
+                    "and are {C:attention}retriggered{}"
+                },
+            },
             j_ananho_curator = {
                 name = "Curator",
                 text = {
