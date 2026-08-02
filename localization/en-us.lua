@@ -92,6 +92,26 @@ return {
                     "and are {C:attention}retriggered{}"
                 },
             },
+            j_ananho_bouquet = {
+                name = "Bouquet",
+                text = {
+                    "Gains {C:mult}+#1#{} Mult for each",
+                    "unique {C:attention}suit{} scored,",
+                    "resets at end of round",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult){}"
+                },
+            },
+            j_ananho_bouquet_spectrum = {
+                name = "Bouquet",
+                text = {
+                    "Gains {C:mult}+#1#{} Mult for each",
+                    "unique {C:attention}suit{} scored,",
+                    "gains {C:mult}+#3#{} Mult for each",
+                    "hand containing a {C:attention}Spectrum{},",
+                    "resets at end of round",
+                    "{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult){}"
+                },
+            },
             j_ananho_curator = {
                 name = "Curator",
                 text = {
@@ -99,6 +119,14 @@ return {
                     "{V:1}#2#{} suit drawn in the",
                     "first hand of each round,",
                     "{s:0.8}suit changes at end of round{}",
+                },
+            },
+            j_ananho_prism = {
+                name = "Prism",
+                text = {
+                    "Cards count for",
+                    "all suit dependant",
+                    "abilities when played"
                 },
             },
         },

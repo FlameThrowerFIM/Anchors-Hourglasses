@@ -391,7 +391,92 @@ SMODS.Joker {
     end
   end,
   in_pool = function()
-    return anchors_and_hourglasses_has_suit("ananho_Anchors", true) or anchors_and_hourglasses_has_suit("ananho_Hourglasses", true)
+    return anchors_and_hourglasses_has_suit("ananho_Anchors", true) or
+        anchors_and_hourglasses_has_suit("ananho_Hourglasses", true)
+  end
+}
+
+SMODS.Joker {
+  key = "bouquet",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 1,
+  cost = 4,
+  pos = { x = 3, y = 2 },
+  config = { extra = { added_mult = 1, current_mult = 0, spectrum_mult = 8 } },
+  loc_vars = function(self, info_queue, card)
+    local key = self.key
+    if card.ability.extra.seen_spectrum then key = key .. "_spectrum" end
+    return { key = key, vars = { card.ability.extra.added_mult, card.ability.extra.current_mult, card.ability.extra.spectrum_mult } }
+  end,
+  calculate = function(self, card, context)
+    if context.joker_main and card.ability.extra.current_mult > 0 then
+      return { mult = card.ability.extra.current_mult }
+    end
+
+    if context.before and not context.blueprint then
+      local best = 0
+      local best_cards = {}
+      local function search(card_index, used_suits, chosen_cards)
+        if card_index > #context.scoring_hand then
+          local count = 0
+          for _ in pairs(used_suits) do
+            count = count + 1
+          end
+          if count > best then
+            best = count
+            best_cards = copy_table(chosen_cards)
+          end
+          return
+        end
+
+        for k, v in pairs(SMODS.Suits) do
+          if context.scoring_hand[card_index]:is_suit(k) then
+            local suit_used = not not used_suits[k]
+            used_suits[k] = true
+
+            if not suit_used then
+              chosen_cards[#chosen_cards + 1] = card_index
+            end
+
+            search(card_index + 1, used_suits, chosen_cards)
+
+            if not suit_used then
+              chosen_cards[#chosen_cards] = nil
+              used_suits[k] = nil
+            end
+          end
+        end
+      end
+      search(1, {}, {})
+
+      local spectrum = next(context.poker_hands["ananho_Spectrum"])
+      card.ability.extra.seen_spectrum = card.ability.extra.seen_spectrum or spectrum
+
+      if best > 0 or spectrum then
+        local add = spectrum and card.ability.extra.spectrum_mult or 0
+        card.ability.extra.current_mult = card.ability.extra.current_mult + (card.ability.extra.added_mult * best) + add
+        local cards = context.scoring_hand
+        G.E_MANAGER:add_event(Event({
+          func = function()
+            for _, v in ipairs(best_cards) do
+              cards[v]:juice_up()
+            end
+            return true
+          end
+        }))
+
+        return {
+          message = localize { type = "variable", key = "a_mult", vars = { best + add } },
+          colour = G.C.FILTER
+        }
+      end
+    end
+
+    if context.end_of_round and not context.individual and not context.repetition and not context.game_over and not context.blueprint then
+      card.ability.extra.current_mult = 0
+      return { message = localize("k_reset"), colour = G.C.RED }
+    end
   end
 }
 
@@ -419,3 +504,18 @@ SMODS.Joker {
     end
   end
 }
+--[[
+SMODS.Joker {
+  key = "prism",
+  atlas = "Jokers",
+  blueprint_compat = false,
+  rarity = 3,
+  cost = 8,
+  pos = { x = 4, y = 2 }
+}
+
+local is_suit_ref = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+  if next(SMODS.find_card("j_ananho_prism")) and not self.debuff then return true end
+  return is_suit_ref(self, suit, bypass_debuff, flush_calc)
+end]] --
