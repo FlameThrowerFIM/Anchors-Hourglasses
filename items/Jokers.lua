@@ -430,8 +430,10 @@ SMODS.Joker {
           return
         end
 
+        local had_suit = false
         for k, v in pairs(SMODS.Suits) do
           if context.scoring_hand[card_index]:is_suit(k) then
+            had_suit = true
             local suit_used = not not used_suits[k]
             used_suits[k] = true
 
@@ -446,6 +448,9 @@ SMODS.Joker {
               used_suits[k] = nil
             end
           end
+        end
+        if not had_suit then
+          search(card_index + 1, used_suits, chosen_cards)
         end
       end
       search(1, {}, {})
