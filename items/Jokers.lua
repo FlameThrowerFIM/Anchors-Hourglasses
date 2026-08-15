@@ -509,18 +509,23 @@ SMODS.Joker {
     end
   end
 }
---[[
+
 SMODS.Joker {
   key = "prism",
   atlas = "Jokers",
   blueprint_compat = false,
   rarity = 3,
   cost = 8,
-  pos = { x = 4, y = 2 }
+  pos = { x = 4, y = 2 },
+  calculate = function(self, card, context)
+    if context.debuff_card and (not SMODS.get_enhancements(context.debuff_card) or not next(SMODS.get_enhancements(context.debuff_card))) then
+      return { prevent_debuff = true }
+    end
+  end
 }
 
 local is_suit_ref = Card.is_suit
 function Card:is_suit(suit, bypass_debuff, flush_calc)
-  if next(SMODS.find_card("j_ananho_prism")) and not self.debuff then return true end
+  if next(SMODS.find_card("j_ananho_prism")) and (not SMODS.get_enhancements(self) or not next(SMODS.get_enhancements(self))) then return true end
   return is_suit_ref(self, suit, bypass_debuff, flush_calc)
-end]] --
+end

@@ -124,9 +124,9 @@ return {
             j_ananho_prism = {
                 name = "Prism",
                 text = {
-                    "Cards count for",
-                    "all suit dependant",
-                    "abilities when played"
+                    "{C:attention}Unenhanced{} cards count",
+                    "as all {C:attention}suits{} and",
+                    "cannot be {C:red}debuffed{}"
                 },
             },
         },
