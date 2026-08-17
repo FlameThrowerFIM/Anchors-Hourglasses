@@ -45,16 +45,15 @@ return {
                 name = "Celestial Navigation",
                 text = {
                     "{C:ananho_anchors}Anchors{} scored have a",
-                    "{C:green}#1# in #2#{} chance to",
-                    "create a random {C:planet}planet{} card",
-                    "{C:green}#1# in #2#{} chance to",
+                    "{C:green}#1# in #2#{} chance to create",
+                    "a random {C:planet}Planet{} card"
                 }
             },
             j_ananho_museum = {
                 name = "Museum",
                 text = {
                     "If played hand contains a card",
-                    "with {C:ananho_hourglasses}Hourglasses{} suit, a random",
+                    "with {C:ananho_hourglasses}Hourglass{} suit, a random",
                     "{C:attention}unenhanced{} card held in hand",
                     "becomes {C:attention}Stone{}, {C:attention}Lucky{} or {C:attention}Gold{}"
                 }
@@ -95,8 +94,8 @@ return {
             j_ananho_flyingdutchman = {
                 name = "The Flying Dutchman",
                 text = {
-                    "Played cards with {C:ananho_anchors}Anchors{}",
-                    "or {C:ananho_hourglasses}Hourglasses{} suits are",
+                    "Played cards with {C:ananho_anchors}Anchor{}",
+                    "or {C:ananho_hourglasses}Hourglass{} suits are",
                     "always used in scoring",
                     "and are {C:attention}retriggered{}"
                 },
