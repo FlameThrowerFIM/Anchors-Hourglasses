@@ -267,6 +267,82 @@ SMODS.Joker {
 }
 
 SMODS.Joker {
+  key = "museum",
+  atlas = "Jokers",
+  blueprint_compat = true,
+  rarity = 2,
+  cost = 6,
+  pos = { x = 2, y = 1 },
+  config = { extra = { suit = "ananho_Hourglasses" } },
+  loc_vars = function(self, info_queue, card)
+    info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
+    info_queue[#info_queue + 1] = G.P_CENTERS.m_lucky
+    info_queue[#info_queue + 1] = G.P_CENTERS.m_gold
+    return {}
+  end,
+  calculate = function(self, card, context)
+    if context.before then
+      local valid
+      for _, v in ipairs(context.scoring_hand) do
+        if v:is_suit("ananho_Hourglasses") then
+          valid = true
+          break
+        end
+      end
+
+      local candidates = {}
+      for _, v in ipairs(G.hand.cards) do
+        if not next(SMODS.get_enhancements(v)) and not v.ability.ananho_museum_chosen then
+          candidates[#candidates + 1] = v
+        end
+      end
+
+      if valid and next(candidates) then
+        local _card = pseudorandom_element(candidates, "ananho_museum_card")
+        local enhancements = { "m_stone", "m_lucky", "m_gold" }
+        local enhancement = pseudorandom_element(enhancements, "ananho_museum_enh3")
+
+        _card.ability.ananho_museum_chosen = true
+        G.E_MANAGER:add_event(Event({
+          trigger = "before",
+          delay = 0.4,
+          func = function()
+            play_sound("tarot1")
+            card:juice_up()
+            _card:flip()
+            play_sound("card1", 1)
+            _card:juice_up(0.3, 0.3)
+            return true
+          end
+        }))
+        G.E_MANAGER:add_event(Event({
+          trigger = "before",
+          delay = 0.2,
+          func = function()
+            _card:set_ability(enhancement)
+            _card.ability.ananho_museum_chosen = nil
+            return true
+          end
+        }))
+        G.E_MANAGER:add_event(Event({
+          delay = 0.1,
+          func = function()
+            _card:flip()
+            play_sound("tarot2", 1)
+            _card:juice_up(0.3, 0.3)
+            return true
+          end
+        }))
+        return { message = localize { key = enhancement, type = "name_text", set = "Enhanced" }, message_card = _card }
+      end
+    end
+  end,
+  in_pool = function()
+    return anchors_and_hourglasses_has_suit("ananho_Hourglasses", true)
+  end
+}
+
+SMODS.Joker {
   key = "tablet",
   atlas = "Jokers",
   blueprint_compat = true,

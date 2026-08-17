@@ -50,6 +50,15 @@ return {
                     "{C:green}#1# in #2#{} chance to",
                 }
             },
+            j_ananho_museum = {
+                name = "Museum",
+                text = {
+                    "If played hand contains a card",
+                    "with {C:ananho_hourglasses}Hourglasses{} suit, a random",
+                    "{C:attention}unenhanced{} card held in hand",
+                    "becomes {C:attention}Stone{}, {C:attention}Lucky{} or {C:attention}Gold{}"
+                }
+            },
             j_ananho_tablet = {
                 name = "Tablet",
                 text = {
