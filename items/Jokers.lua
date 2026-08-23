@@ -594,7 +594,8 @@ SMODS.Joker {
   cost = 8,
   pos = { x = 4, y = 2 },
   calculate = function(self, card, context)
-    if context.debuff_card and (not SMODS.get_enhancements(context.debuff_card) or not next(SMODS.get_enhancements(context.debuff_card))) then
+    if context.debuff_card and (context.debuff_card.ability.set == "Default" or context.debuff_card.ability.set == "Enhanced")
+    and (not SMODS.get_enhancements(context.debuff_card) or not next(SMODS.get_enhancements(context.debuff_card))) then
       return { prevent_debuff = true }
     end
   end
