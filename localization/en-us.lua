@@ -1,5 +1,15 @@
 return {
     descriptions = {
+        Back = {
+            b_ananho_territorial = {
+                name = "Territorial Deck",
+                text = {
+                    "Start with full sets",
+                    "of cards with {C:ananho_anchors}Anchors{}",
+                    "and {C:ananho_hourglasses}Hourglasses{} suits",
+                }
+            }
+        },
         Joker = {
             j_ananho_vainglorious = {
                 name = "Vainglorious Joker",

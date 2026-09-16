@@ -52,16 +52,15 @@ SMODS.Suit {
             return true
         end
 
-        if args and args.initial_deck and false then
-            -- When creating a deck
+        if args and args.initial_deck then
             local back = G.GAME.selected_back
-            local back_config = back and back.effect.center.paperback
+            local back_config = back and back.effect.center.ananho
 
             local sleeve = G.GAME.selected_sleeve
-            local sleeve_config = (G.P_CENTERS[sleeve] or {}).paperback
+            local sleeve_config = (G.P_CENTERS[sleeve] or {}).ananho
 
-            return (back_config and back_config.create_crowns)
-                or (sleeve_config and sleeve_config.create_crowns)
+            return (back_config and back_config.create_anchors)
+                or (sleeve_config and sleeve_config.create_anchors)
         else
             return anchors_and_hourglasses_has_suit("ananho_Anchors", true)
         end
@@ -85,16 +84,15 @@ SMODS.Suit {
             return true
         end
 
-        if args and args.initial_deck and false then
-            -- When creating a deck
+        if args and args.initial_deck then
             local back = G.GAME.selected_back
-            local back_config = back and back.effect.center.paperback
+            local back_config = back and back.effect.center.ananho
 
             local sleeve = G.GAME.selected_sleeve
-            local sleeve_config = (G.P_CENTERS[sleeve] or {}).paperback
+            local sleeve_config = (G.P_CENTERS[sleeve] or {}).ananho
 
-            return (back_config and back_config.create_crowns)
-                or (sleeve_config and sleeve_config.create_crowns)
+            return (back_config and back_config.create_hourglasses)
+                or (sleeve_config and sleeve_config.create_hourglasses)
         else
             return anchors_and_hourglasses_has_suit("ananho_Hourglasses", true)
         end
