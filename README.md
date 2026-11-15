@@ -1,5 +1,5 @@
 # Anchors & Hourglasses
-A mod that adds two new suits to *Balatro* and adds new content surrounding them, ranging from new *poker hands* to new *Jokers*, *Tarot Cards* and more.
+A mod that adds two new suits to *Balatro* and adds new content surrounding them, ranging from new *poker hands* to new *Jokers*, *Tarot Cards* and more!
 
 ## FEATURES:
 - 15 new *Jokers*
